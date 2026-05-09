@@ -10,18 +10,19 @@ import {
   TextField,
 } from "@heroui/react";
 import { FcGoogle } from "react-icons/fc";
+import { useForm } from "react-hook-form";
 
 export default function SignInPage() {
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
-    });
-
-    alert("Form submitted successfully!");
+  const onSubmit = async (data) => {
+    console.log(data);
+    const { email, password } = data;
+    console.log(email, password);
   };
 
   return (
@@ -32,29 +33,43 @@ export default function SignInPage() {
           Enter your credentials to access your account
         </Card.Description>
       </Card.Header>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Card.Content>
           <div className="flex flex-col gap-4">
             <TextField name="email" type="email">
               <Label>Email</Label>
-              <Input placeholder="Enter Your Email" variant="secondary" />
+              <Input
+                placeholder="Enter Your Email"
+                variant="secondary"
+                {...register("email", { required: "Email field is required" })}
+              />
             </TextField>
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
             <TextField name="password" type="password">
               <Label>Password</Label>
-              <Input placeholder="Enter Your Password" variant="secondary" />
+              <Input
+                placeholder="Enter Your Password"
+                variant="secondary"
+                {...register("password", {
+                  required: "Password field is required",
+                })}
+              />
             </TextField>
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
           </div>
         </Card.Content>
         <Card.Footer className="mt-6 flex flex-col gap-2">
           <Button className="w-full" type="submit">
             Sign In
           </Button>
-          <Link className="text-center text-sm" href="#">
-            Forgot password?
-          </Link>
+
           <p>or</p>
           <Link href="/">
-            <FcGoogle className={"mr-2"} size={22} />
+            <FcGoogle className="mr-2" size={22} />
             Continue with Google
           </Link>
         </Card.Footer>

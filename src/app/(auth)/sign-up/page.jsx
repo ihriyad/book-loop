@@ -9,19 +9,20 @@ import {
   Link,
   TextField,
 } from "@heroui/react";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
 export default function SignUpPage() {
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
-    });
-
-    alert("Form submitted successfully!");
+  const onSubmit = async (data) => {
+    console.log(data);
+    const { name, email, password, photo } = data;
+    console.log(name, photo);
   };
 
   return (
@@ -34,26 +35,53 @@ export default function SignUpPage() {
           Enter your credentials to create your account
         </Card.Description>
       </Card.Header>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Card.Content>
           <div className="flex flex-col gap-4">
             <TextField name="name" type="text">
               <Label>Name</Label>
-              <Input placeholder="Enter Your Name" variant="secondary" />
+              <Input
+                placeholder="Enter Your Name"
+                variant="secondary"
+                {...register("name", { required: "Name field is required" })}
+              />
+              {errors.name && (
+                <p className="text-red-500">{errors.name.message}</p>
+              )}
             </TextField>
             <TextField name="name" type="text">
               <Label>Image URL</Label>
-              <Input placeholder="Enter Your Image URL" variant="secondary" />
+              <Input
+                placeholder="Enter Your Image URL"
+                variant="secondary"
+                {...register("photo", { required: "Photo url is required" })}
+              />
             </TextField>
 
             <TextField name="email" type="email">
               <Label>Email</Label>
-              <Input placeholder="Enter Your Email" variant="secondary" />
+              <Input
+                placeholder="Enter Your Email"
+                variant="secondary"
+                {...register("email", { required: "Email field is required" })}
+              />
             </TextField>
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
             <TextField name="password" type="password">
               <Label>Password</Label>
-              <Input placeholder="Enter Your Password" variant="secondary" />
+              <Input
+                placeholder="Enter Your Password"
+                variant="secondary"
+                {...register("password", {
+                  required: "Password field is required",
+                })}
+              />
             </TextField>
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
           </div>
         </Card.Content>
         <Card.Footer className="mt-6 flex flex-col gap-2">
@@ -68,7 +96,7 @@ export default function SignUpPage() {
           </div>
           <p>or</p>
           <Link href="/">
-            <FcGoogle className={"mr-2"} size={22} />
+            <FcGoogle className="mr-2" size={22} />
             Continue with Google
           </Link>
         </Card.Footer>
