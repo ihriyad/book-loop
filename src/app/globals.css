@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@heroui/styles"; 
+@import "@heroui/styles";
 
 :root {
   /* Override any color variable */
@@ -7,17 +7,17 @@
   --success: oklch(0.65 0.15 155);
 }
 
-/* .home {
-  background-image: url("../assets/banner2.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 100vh;
+.swiper-button-next,
+.swiper-button-prev {
+  color: cyan !important;
+  background: black;
+  font-weight: 600;
+  border-radius: 50%;
+  border: 2px solid gray;
+  width: 36px !important;
+  height: 36px !important;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 768px) {
-  .home {
-    background-size: cover;
-    background-position: right;
-  }
-} */
+/*  */

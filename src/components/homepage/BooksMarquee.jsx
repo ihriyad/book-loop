@@ -4,8 +4,8 @@ import { Span } from "next/dist/trace";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-const BooksMarquee =async () => {
-  const books = await getBooks();
+const BooksMarquee =async ({books}) => {
+
   // console.log(books)
   return (
     <div className="flex justify-between items-center gap-2 container mx-auto py-3 px-2 rounded mt-4">
