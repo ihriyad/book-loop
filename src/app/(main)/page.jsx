@@ -5,8 +5,7 @@ import BooksMarquee from "@/components/homepage/BooksMarquee";
 const Home = () => {
   return (
     <div>
-        <HomePage></HomePage>
-          
+      <HomePage></HomePage>
     </div>
   );
 };
