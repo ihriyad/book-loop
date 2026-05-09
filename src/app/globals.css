@@ -6,3 +6,18 @@
   --accent: oklch(0.7 0.25 260);
   --success: oklch(0.65 0.15 155);
 }
+
+/* .home {
+  background-image: url("../assets/banner2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .home {
+    background-size: cover;
+    background-position: right;
+  }
+} */

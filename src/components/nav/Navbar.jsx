@@ -7,6 +7,8 @@ import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Audiowide, Orbitron } from "next/font/google";
 
+import Profile from "../profile/Profile";
+
 const orbitron = Orbitron({
   subsets: ["latin"],
 });
@@ -27,7 +29,7 @@ const Navbar = () => {
         <Link href="/books">All Books</Link>
       </li>
       <li>
-        <Link href="#">My Profile</Link>
+        <Link href="/profile">My Profile</Link>
       </li>
     </>
   );
@@ -64,38 +66,39 @@ const Navbar = () => {
               )}
             </svg>
           </button>
-         <div className="font-bold text-2xl md:text-4xl tracking-tight">
-  <Link
-    href="/"
-    className={`${orbitron.className} inline-flex items-center`}
-  >
-    <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-      Book
-    </span>
+          <div className="font-bold text-2xl md:text-4xl tracking-tight">
+            <Link
+              href="/"
+              className={`${orbitron.className} inline-flex items-center`}
+            >
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Book
+              </span>
 
-    <span
-      className={`${audiowide.className} ml-1 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent`}
-    >
-      Loop
-    </span>
-  </Link>
-</div>
+              <span
+                className={`${audiowide.className} ml-1 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent`}
+              >
+                Loop
+              </span>
+            </Link>
+          </div>
         </div>
         <ul className="hidden items-center gap-4 md:flex">{links}</ul>
-        <div className="hidden md:flex gap-4">
-          <Button>Login</Button>
-          <ThemeToggle></ThemeToggle>
+
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <Link href={"/sign-in"}>
+              <Button variant="secondary">Login</Button>
+            </Link>
+            <Link href={"/sign-up"}>Resister</Link>
+          </div>
+
+          <Profile></Profile>
         </div>
       </header>
       {isMenuOpen && (
         <div className="border-t border-separator md:hidden">
-          <ul className="flex flex-col gap-2 p-4">
-            {links}
-            <div className="flex gap-3">
-              <p>Theme</p>
-              <ThemeToggle></ThemeToggle>
-            </div>
-          </ul>
+          <ul className="flex flex-col gap-2 p-4">{links}</ul>
         </div>
       )}
     </nav>
