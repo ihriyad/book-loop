@@ -95,8 +95,11 @@ const Navbar = () => {
             </div>
           ) : user ? (
             <div className="flex items-center gap-2 justify-center">
-              <span className="hidden md:flex">Welcome,</span>
-              <span className="text-cyan-500 font-bold">{user.name}</span>
+              <div className="flex items-center">
+                {" "}
+                <span className="hidden md:flex">Welcome,</span>
+                <span className="text-cyan-500 font-bold">{user.name}</span>
+              </div>
               <Profile user={user}></Profile>
             </div>
           ) : (

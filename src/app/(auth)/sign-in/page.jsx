@@ -12,6 +12,7 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function SignInPage() {
   const {
@@ -32,18 +33,18 @@ export default function SignInPage() {
     });
     console.log(res, error);
     if (res) {
-      alert("login success");
+      toast.success("Login Success");
     }
     if (error) {
-      alert(error.message);
+      toast.error("Login failed. Check your credentials.");
     }
   };
-   const signIn = async () => {
+  const signIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
 
-    console.log(data,"from google sign in")
+    console.log(data, "from google sign in");
   };
 
   return (

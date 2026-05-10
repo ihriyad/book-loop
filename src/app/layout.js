@@ -4,6 +4,7 @@ import NextThemeProvider from "@/providers/NextThemeProvider";
 
 
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,7 +28,6 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-background text-foreground max-w-7xl mx-auto p-3">
        <NextThemeProvider>
-
           <main>{children}</main>
        </NextThemeProvider>
         

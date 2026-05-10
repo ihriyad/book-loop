@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import avatar from "@/assets/user.jpg";
-import { Button, Drawer } from "@heroui/react";
+import { Avatar, Button, Drawer } from "@heroui/react";
 import Link from "next/link";
 import ThemeToggle from "../theme/ThemeToggle";
 import { authClient } from "@/lib/auth-client";
@@ -27,15 +27,9 @@ const Profile = ({ user }) => {
         className="rounded-full p-0 min-w-fit w-fit h-fit"
         onClick={() => setIsOpen(true)}
       >
-        <Image
-          src={user?.image || avatar}
-          alt={user?.name || "User avatar"}
-          height={40}
-          width={40}
-          className={`rounded-full object-cover w-[40px] h-[40px] ${
-            user ? "ring-2 ring-green-400 ring-offset-2" : ""
-          }`}
-        />
+        <Avatar>
+          <Avatar.Image alt="User Image" src={user.image || avatar} />
+        </Avatar>
       </Button>
 
       <Drawer isOpen={isOpen} onOpenChange={setIsOpen}>
@@ -45,15 +39,12 @@ const Profile = ({ user }) => {
               <Drawer.Header>
                 <Drawer.Heading>
                   <div className="flex justify-center flex-col items-center mb-4 md:mb-8 space-y-3">
-                    <Image
-                      src={user?.image || avatar}
-                      alt={user?.name || "User avatar"}
-                      height={60}
-                      width={60}
-                      className={`rounded-full object-cover w-[60px] h-[60px] ${
-                        user ? "ring-2 ring-green-400 ring-offset-2" : ""
-                      }`}
-                    />
+                    <Avatar className="w-14 h-14">
+                      <Avatar.Image
+                        alt="User Image"
+                        src={user.image || avatar}
+                      />
+                    </Avatar>
                     <Link href="/profile" onClick={handleEditProfile}>
                       Edit Profile
                     </Link>

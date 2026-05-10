@@ -48,7 +48,7 @@ const MyProfile = ({ user }) => {
 
   return (
     <div className="md:min-h-screen flex items-center justify-center px-4 py-8 md:py-16">
-      <div className=" border-2 border-gray-100 rounded-2xl p-8 w-full max-w-md shadow-sm">
+      <div className="rounded-2xl p-8 w-full max-w-md shadow-sm">
         <div className="flex flex-col items-center mb-8">
           <div className="relative w-24 h-24 mb-3">
             <Image
@@ -93,7 +93,7 @@ const MyProfile = ({ user }) => {
               Profile updated successfully!
             </p>
           )}
-    
+
           <Button
             variant="secondary"
             onClick={handleUpdate}
