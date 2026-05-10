@@ -51,10 +51,7 @@ const Profile = () => {
                 <div className=""></div>
               </Drawer.Body>
               <Drawer.Footer>
-                <Button slot="close" variant="secondary">
-                  Cancel
-                </Button>
-                <Button slot="close">Confirm</Button>
+                <Button slot="close">Close</Button>
               </Drawer.Footer>
             </Drawer.Dialog>
           </Drawer.Content>

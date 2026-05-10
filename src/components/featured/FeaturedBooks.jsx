@@ -5,6 +5,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
+import { Button } from "@heroui/react";
+import Link from "next/link";
 
 const FeaturedBooks = ({ books }) => {
   const featured = books.slice(0, 7);
@@ -48,13 +50,13 @@ const FeaturedBooks = ({ books }) => {
                 <p className="text-xs text-default-400 mt-2 line-clamp-2">
                   {book.description}
                 </p>
-                <div className="mt-3 flex items-center justify-between">
+                <div className="my-3 flex items-center justify-between">
                   <span className="text-xs text-default-400">
                     {book.available_quantity} available
                   </span>
-                  <button className="text-xs text-primary font-medium hover:underline">
-                    Borrow →
-                  </button>
+                 <Link href={`/books/${book.id}`}> <Button className={"rounded-md"} variant="secondary">
+                   View Details
+                  </Button></Link>
                 </div>
               </div>
             </div>

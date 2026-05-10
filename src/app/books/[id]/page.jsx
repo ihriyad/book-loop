@@ -1,9 +1,16 @@
+import BookDetails from '@/components/books/BookDetails';
+import { getBooksDetails } from '@/lib/load-data';
 import React from 'react';
 
-const BookDetailsPage = () => {
+const BookDetailsPage = async({params}) => {
+
+    const {id} = await params;
+    const data = await getBooksDetails(id);
+    // console.log(data);
+    
     return (
         <div>
-            BookDetailsPage
+            <BookDetails data={data}></BookDetails>
         </div>
     );
 };
