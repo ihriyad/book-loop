@@ -39,7 +39,7 @@ export const getStats = async () => {
 //faq data for faq section:
 
 export const getFaq = async () => {
-  const res = await fetch("https://book-loop-server-bidc.onrender.com/stats");
+  const res = await fetch("https://book-loop-server-bidc.onrender.com/faqs");
   if (!res.ok) {
     throw new Error("failed to fetch stats");
   }
