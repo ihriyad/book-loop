@@ -1,57 +1,78 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import user from "@/assets/user.jpg";
+import avatar from "@/assets/user.jpg";
 import { Button, Drawer } from "@heroui/react";
 import Link from "next/link";
 import ThemeToggle from "../theme/ThemeToggle";
+import { authClient } from "@/lib/auth-client";
 
-const Profile = () => {
+const Profile = ({ user }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    setIsOpen(false);
+  };
+
+  const handleEditProfile = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
-      <Drawer>
-        <Button
-          isIconOnly
-          variant="light"
-          className="rounded-full p-0 min-w-fit w-fit h-fit"
-        >
-          <Image
-            className="rounded-full"
-            src={user}
-            alt="user photo"
-            height={40}
-            width={40}
-          ></Image>
-        </Button>
+      <Button
+        isIconOnly
+        variant="light"
+        className="rounded-full p-0 min-w-fit w-fit h-fit"
+        onClick={() => setIsOpen(true)}
+      >
+        <Image
+          src={user?.image || avatar}
+          alt={user?.name || "User avatar"}
+          height={40}
+          width={40}
+          className={`rounded-full object-cover w-[40px] h-[40px] ${
+            user ? "ring-2 ring-green-400 ring-offset-2" : ""
+          }`}
+        />
+      </Button>
+
+      <Drawer isOpen={isOpen} onOpenChange={setIsOpen}>
         <Drawer.Backdrop>
           <Drawer.Content placement="right">
             <Drawer.Dialog>
               <Drawer.Header>
                 <Drawer.Heading>
-                  <div className="flex justify-center flex-col items-center mb-4">
+                  <div className="flex justify-center flex-col items-center mb-4 md:mb-8 space-y-3">
                     <Image
-                      className="rounded-full"
-                      src={user}
-                      alt="user photo"
+                      src={user?.image || avatar}
+                      alt={user?.name || "User avatar"}
                       height={60}
                       width={60}
-                    ></Image>
-                    <Link href={"/profile"}>Edit Profile</Link>
+                      className={`rounded-full object-cover w-[60px] h-[60px] ${
+                        user ? "ring-2 ring-green-400 ring-offset-2" : ""
+                      }`}
+                    />
+                    <Link href="/profile" onClick={handleEditProfile}>
+                      Edit Profile
+                    </Link>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <Link href={"/sign-in"}>Login</Link>
-                    <Link href={"/sign-up"}>Resister</Link>
+                    <div
+                      onClick={handleLogout}
+                      className="hover:bg-cyan-600 p-3 cursor-pointer rounded-lg"
+                    >
+                      Logout
+                    </div>
                   </div>
                 </Drawer.Heading>
               </Drawer.Header>
               <Drawer.Body>
-                <div>
-                  <ThemeToggle></ThemeToggle>
-                </div>
-                <div className=""></div>
+                <ThemeToggle />
               </Drawer.Body>
               <Drawer.Footer>
-                <Button slot="close">Close</Button>
+                <Button onClick={() => setIsOpen(false)}>Close</Button>
               </Drawer.Footer>
             </Drawer.Dialog>
           </Drawer.Content>

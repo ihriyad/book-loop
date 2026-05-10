@@ -8,6 +8,7 @@ const categories = ["All", "Story", "Tech", "Science"];
 const BooksCategory = ({ books }) => {
   const [selected, setSelected] = useState("All");
   const [query, setQuery] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const filtered = books
     .filter((book) => selected === "All" || book.category === selected)
@@ -32,7 +33,7 @@ const BooksCategory = ({ books }) => {
         </div>
         {/* drawer */}
         <div className="mt-2 md:mt-4">
-          <Drawer>
+          <Drawer isOpen={isOpen} onOpenChange={setIsOpen}>
             <Button className={"md:text-lg rounded-md"} variant="secondary">
               Books Category
             </Button>
@@ -65,7 +66,8 @@ const BooksCategory = ({ books }) => {
         </div>
       </div>
       <h2 className="text-center text-md my-4">
-        Showing Category: <span className="text-cyan-600 font-bold">{selected}</span>
+        Showing Category:{" "}
+        <span className="text-cyan-600 font-bold">{selected}</span>
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filtered.map((book) => (

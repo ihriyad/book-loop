@@ -4,10 +4,11 @@ import { useState } from "react";
 
 import ThemeToggle from "../theme/ThemeToggle";
 import Link from "next/link";
-import { Button } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { Audiowide, Orbitron } from "next/font/google";
 
 import Profile from "../profile/Profile";
+import { authClient } from "@/lib/auth-client";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ const audiowide = Audiowide({
 });
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+  // console.log(user);
   const links = (
     <>
       <li>
@@ -66,7 +69,7 @@ const Navbar = () => {
               )}
             </svg>
           </button>
-          <div className="font-bold text-2xl md:text-4xl tracking-tight">
+          <div className="font-bold text-md md:text-4xl tracking-tight">
             <Link
               href="/"
               className={`${orbitron.className} inline-flex items-center`}
@@ -85,15 +88,27 @@ const Navbar = () => {
         </div>
         <ul className="hidden items-center gap-4 md:flex">{links}</ul>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-3">
-            <Link href={"/sign-in"}>
-              <Button variant="secondary">Login</Button>
-            </Link>
-            <Link href={"/sign-up"}>Resister</Link>
-          </div>
-
-          <Profile></Profile>
+        <div className="flex items-center justify-center  gap-4">
+          {isPending ? (
+            <div className="flex flex-col items-center gap-2">
+              <Spinner color="success" />
+            </div>
+          ) : user ? (
+            <div className="flex items-center gap-2 justify-center">
+              <span className="hidden md:flex">Welcome,</span>
+              <span className="text-cyan-500 font-bold">{user.name}</span>
+              <Profile user={user}></Profile>
+            </div>
+          ) : (
+            <>
+              <div className="hidden md:flex items-center gap-3">
+                <Link href={"/sign-in"}>
+                  <Button variant="secondary">Login</Button>
+                </Link>
+                <Link href={"/sign-up"}>Resister</Link>
+              </div>
+            </>
+          )}
         </div>
       </header>
       {isMenuOpen && (

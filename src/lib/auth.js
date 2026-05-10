@@ -6,6 +6,11 @@ const client = new MongoClient(process.env.MONGO_URI);
 const db = client.db("book-loop");
 
 export const auth = betterAuth({
+  user: {
+    additionalFields: {
+      image: { type: "string" },
+    },
+  },
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client,

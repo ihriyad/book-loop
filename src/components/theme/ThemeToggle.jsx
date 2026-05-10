@@ -9,16 +9,13 @@ const ThemeToggle = () => {
 
   return (
     <div className="flex items-center gap-3">
-      <h2 className="">{theme} Mode</h2>
-      <Switch onChange={()=>setTheme(theme === "light"?
-        "dark": "light"
-      )}>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
-      
-    </Switch>
-        </div>
+      <h2 className="uppercase font-bold">{theme} Mode</h2>
+      <Switch onChange={() => setTheme(theme === "light" ? "dark" : "light")}>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+      </Switch>
+    </div>
   );
 };
 
