@@ -11,6 +11,7 @@ import {
 } from "@heroui/react";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
+import { authClient } from "@/lib/auth-client";
 
 export default function SignInPage() {
   const {
@@ -22,7 +23,27 @@ export default function SignInPage() {
   const onSubmit = async (data) => {
     console.log(data);
     const { email, password } = data;
-    console.log(email, password);
+    // console.log(email, password);
+
+    const { data: res, error } = await authClient.signIn.email({
+      email: email,
+      password: password,
+      callbackURL: "/",
+    });
+    console.log(res, error);
+    if (res) {
+      alert("login success");
+    }
+    if (error) {
+      alert(error.message);
+    }
+  };
+   const signIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+
+    console.log(data,"from google sign in")
   };
 
   return (
@@ -68,7 +89,7 @@ export default function SignInPage() {
           </Button>
 
           <p>or</p>
-          <Link href="/">
+          <Link onClick={signIn} href="/">
             <FcGoogle className="mr-2" size={22} />
             Continue with Google
           </Link>

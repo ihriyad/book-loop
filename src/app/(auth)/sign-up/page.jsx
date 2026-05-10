@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Card,
@@ -9,6 +10,7 @@ import {
   Link,
   TextField,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
@@ -23,6 +25,28 @@ export default function SignUpPage() {
     console.log(data);
     const { name, email, password, photo } = data;
     console.log(name, photo);
+
+    const { data: res, error } = await authClient.signUp.email({
+      name: name,
+      email: email,
+      password: password,
+      image: photo,
+    });
+    console.log(res, error);
+    if (error) {
+      alert(error.message);
+    }
+    if (res) {
+      alert("SignUp success");
+      redirect("/");
+    }
+  };
+  const signUp = async () => {
+    const data = await authClient.signUp.social({
+      provider: "google",
+    });
+
+    console.log(data, "from google sign up");
   };
 
   return (
@@ -95,7 +119,7 @@ export default function SignUpPage() {
             </Link>
           </div>
           <p>or</p>
-          <Link href="/">
+          <Link onClick={signUp} href="/">
             <FcGoogle className="mr-2" size={22} />
             Continue with Google
           </Link>
