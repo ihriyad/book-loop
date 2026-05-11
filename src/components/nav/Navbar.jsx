@@ -121,7 +121,7 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <div className="hidden md:flex items-center gap-3">
+              <div className="flex items-center gap-3">
                 <Link href={"/sign-in"}>
                   <Button variant="secondary">Login</Button>
                 </Link>
