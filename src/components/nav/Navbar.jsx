@@ -9,6 +9,7 @@ import { Audiowide, Orbitron } from "next/font/google";
 
 import Profile from "../profile/Profile";
 import { authClient } from "@/lib/auth-client";
+import { usePathname } from "next/navigation";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -18,24 +19,37 @@ const audiowide = Audiowide({
   weight: "400",
   subsets: ["latin"],
 });
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/books", label: "All Books" },
+  { href: "/profile", label: "My Profile" },
+];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
   // console.log(user);
+  const pathname = usePathname();
+  console.log(pathname);
   const links = (
     <>
-      <li>
-        <Link href="/">Home</Link>
-      </li>
-      <li>
-        <Link href="/books">All Books</Link>
-      </li>
-      <li>
-        <Link href="/profile">My Profile</Link>
-      </li>
+      {navLinks.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className={`text-md ${
+            pathname === link.href
+              ? "text-cyan-400 font-semibold border-b-2 border-cyan-400"
+              : "text-stone-500 hover:text-cyan-400"
+          }`}
+        >
+          {link.label}
+        </Link>
+      ))}
     </>
   );
+
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
       <header className="flex h-16 items-center justify-between px-6">

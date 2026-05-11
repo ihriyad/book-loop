@@ -1,8 +1,10 @@
+'use client'
 import { ArrowLeft } from "@gravity-ui/icons";
 import { Button, Card, CloseButton } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 
 const BookDetails = ({ data }) => {
   const { author, title, image_url, description, category } = data;
@@ -39,7 +41,7 @@ const BookDetails = ({ data }) => {
                 </span>
                 <span className="text-xs text-muted">by {author}</span>
               </div>
-              <Button variant="secondary" className="w-full  rounded-md">
+              <Button onClick={()=>toast.success("Book Borrowed Successfully")} variant="secondary" className="w-full  rounded-md">
                 Borrow Now
               </Button>
             </div>

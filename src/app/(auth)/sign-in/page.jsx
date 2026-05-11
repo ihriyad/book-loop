@@ -13,8 +13,11 @@ import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -29,11 +32,14 @@ export default function SignInPage() {
     const { data: res, error } = await authClient.signIn.email({
       email: email,
       password: password,
-      callbackURL: "/",
+      // callbackURL: "/",
     });
     console.log(res, error);
-    if (res) {
-      toast.success("Login Success");
+       if (res) {
+      toast.success("Login successful!");
+      setTimeout  (() => {
+        router.push("/");  
+      }, 1500);             
     }
     if (error) {
       toast.error("Login failed. Check your credentials.");
