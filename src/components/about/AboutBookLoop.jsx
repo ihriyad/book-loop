@@ -83,7 +83,7 @@ export default async function AboutBookLoop() {
           <p className="text-2xl italic text-amber-700 mb-6">
             Ready to find your next book?
           </p>
-          <Link href={"/sign-in"}><Button variant="secondary">Start Exploring</Button></Link>
+          <Link href={"/"}><Button variant="secondary">Start Exploring</Button></Link>
         </div>
       </div>
     </section>

@@ -10,11 +10,14 @@ import {
   Link,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -34,11 +37,13 @@ export default function SignUpPage() {
     });
     console.log(res, error);
     if (error) {
-      alert(error.message);
+      toast.error("Signup failed. Try again later.");
     }
     if (res) {
-      alert("SignUp success");
-      redirect("/");
+      toast.success("SignUP successful!");
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
     }
   };
   const signUp = async () => {

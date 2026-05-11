@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📚 Book Loop
+
+Book Loop is a free book discovery platform where you can browse, search, and filter books by category. Users can create an account, update their profile, and access book details after signing in.
+
+---
+
+## About the Project
+
+Book Loop was built as a full-stack Next.js application using the App Router. The goal was to create a clean, fast, and user-friendly platform where book lovers can find their next great read without any hassle. It supports light and dark mode, is fully responsive, and keeps things simple with a warm editorial design.
+
+---
+
+## Tech Used
+
+**Next.js** — The core framework. We use the App Router for routing, server components for data fetching, and middleware for protecting private routes like book detail pages and the profile page.
+
+**Tailwind CSS** — Used for all styling throughout the app. Utility classes keep the code clean and consistent without writing any custom CSS.
+
+**HeroUI** — A React component library built on top of Tailwind. Used for UI elements like the Drawer, Accordion, Cards, Buttons, and Input fields.
+
+**Better Auth** — Handles all authentication including email/password sign in, sign up, Google OAuth, and session management. User data like name and profile photo can be updated directly through the `authClient.updateUser()` method.
+
+**MongoDB Atlas** — Cloud database where all user data and session information is stored. Connected through Better Auth's MongoDB adapter.
+
+**React Hook Form** — Used to handle form state and validation on the sign in and sign up pages cleanly without unnecessary re-renders.
+
+**React Hot Toast** — Lightweight toast notification library for showing success and error messages after actions like login, logout, and profile update.
+
+**next-themes** — Handles dark and light mode switching, synced with the user's system preference by default.
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repo and run `npm install`
+2. Create a `.env.local` file and add your MongoDB URI, Better Auth secret, and Google OAuth credentials
+3. Run `npm run dev` and open `http://localhost:3000`

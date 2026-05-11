@@ -29,12 +29,15 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-  // console.log(user);
   const pathname = usePathname();
-  console.log(pathname);
+
+  const filteredLinks = navLinks.filter(
+    (link) => link.href !== "/profile" || user,
+  );
+
   const links = (
     <>
-      {navLinks.map((link) => (
+      {filteredLinks.map((link) => (
         <Link
           key={link.href}
           href={link.href}
