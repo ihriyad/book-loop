@@ -49,6 +49,7 @@ export default function SignUpPage() {
   const signUp = async () => {
     const data = await authClient.signUp.social({
       provider: "google",
+      callbackURL: "/",
     });
 
     console.log(data, "from google sign up");
@@ -124,10 +125,10 @@ export default function SignUpPage() {
             </Link>
           </div>
           <p>or</p>
-          <Link onClick={signUp} href="/">
-            <FcGoogle className="mr-2" size={22} />
+         <Button className={"w-full"} variant="secondary" onClick={signUp}>
+            <FcGoogle size={22} />
             Continue with Google
-          </Link>
+          </Button>
         </Card.Footer>
       </Form>
     </Card>

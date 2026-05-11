@@ -15,10 +15,7 @@ import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-
-
 export default function SignInPage() {
-
   const router = useRouter();
   const {
     register,
@@ -37,11 +34,11 @@ export default function SignInPage() {
       // callbackURL: "/",
     });
     console.log(res, error);
-       if (res) {
+    if (res) {
       toast.success("Login successful!");
-      setTimeout  (() => {
-        router.push("/");  
-      }, 1500);             
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
     }
     if (error) {
       toast.error("Login failed. Check your credentials.");
@@ -50,6 +47,7 @@ export default function SignInPage() {
   const signIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
+      callbackURL: "/",
     });
 
     console.log(data, "from google sign in");
@@ -98,10 +96,10 @@ export default function SignInPage() {
           </Button>
 
           <p>or</p>
-          <Link onClick={signIn} href="/">
-            <FcGoogle className="mr-2" size={22} />
+          <Button className={"w-full"} variant="secondary" onClick={signIn}>
+            <FcGoogle size={22} />
             Continue with Google
-          </Link>
+          </Button>
         </Card.Footer>
       </Form>
     </Card>
