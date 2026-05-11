@@ -29,7 +29,7 @@ export default function SignUpPage() {
     const { name, email, password, photo } = data;
     console.log(name, photo);
 
-    const { data: res, error } = await authClient.signUp.email({
+    const { data: res, error } = await authClient.signIn.email({
       name: name,
       email: email,
       password: password,
